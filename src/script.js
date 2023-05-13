@@ -18,7 +18,9 @@ const geometry = new THREE.SphereBufferGeometry(0.5, 64, 64)
 // Materials
 
 const material = new THREE.MeshStandardMaterial()
-material.color = new THREE.Color(0xff0000)
+material.metalness = 0.7
+material.roughness = 0.2
+material.color = new THREE.Color(0x292929)
 
 // Mesh
 const sphere = new THREE.Mesh(geometry, material)
@@ -77,7 +79,8 @@ scene.add(camera)
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
-  canvas: canvas
+  canvas: canvas,
+  alpha: true
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
