@@ -3,6 +3,11 @@ import * as THREE from "three"
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js"
 import * as dat from "dat.gui"
 
+// Loaders
+const textureLoader = new THREE.TextureLoader()
+
+const normalTexture = textureLoader.load("/textures/NormalMap.png")
+
 // Debug
 const gui = new dat.GUI()
 
@@ -20,7 +25,7 @@ const geometry = new THREE.SphereBufferGeometry(0.5, 64, 64)
 const material = new THREE.MeshStandardMaterial()
 material.metalness = 0.7
 material.roughness = 0.2
-material.color = new THREE.Color(0x292929)
+material.normalMap = normalTexture
 
 // Mesh
 const sphere = new THREE.Mesh(geometry, material)
@@ -33,6 +38,42 @@ pointLight.position.x = 2
 pointLight.position.y = 3
 pointLight.position.z = 4
 scene.add(pointLight)
+
+// Light 2
+
+const pointLight2 = new THREE.PointLight(0xff0000, 2)
+pointLight2.position.set(0.87, 0.95, -0.18)
+pointLight2.intensity = 1
+
+scene.add(pointLight2)
+
+const light1 = gui.addFolder("Light 1")
+
+light1.add(pointLight2.position, "y").min(-3).max(3).step(0.01)
+light1.add(pointLight2.position, "x").min(-6).max(6).step(0.01)
+light1.add(pointLight2.position, "z").min(-3).max(3).step(0.01)
+light1.add(pointLight2, "intensity").min(0).max(10).step(0.01)
+
+const pointLightHelper = new THREE.PointLightHelper(pointLight2, 1)
+scene.add(pointLightHelper)
+
+// Light 2
+
+const pointLight3 = new THREE.PointLight(0xff0000, 2)
+pointLight3.position.set(0.87, 0.95, -0.18)
+pointLight3.intensity = 1
+
+scene.add(pointLight3)
+
+const light2 = gui.addFolder("Light 2")
+
+light2.add(pointLight3.position, "y").min(-3).max(3).step(0.01)
+light2.add(pointLight3.position, "x").min(-6).max(6).step(0.01)
+light2.add(pointLight3.position, "z").min(-3).max(3).step(0.01)
+light2.add(pointLight3, "intensity").min(0).max(10).step(0.01)
+
+const pointLightHelper3 = new THREE.PointLightHelper(pointLight3, 1)
+scene.add(pointLightHelper3)
 
 /**
  * Sizes
